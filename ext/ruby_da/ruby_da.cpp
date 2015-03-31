@@ -31,7 +31,7 @@ static VALUE vector_to_array(vector<string> vec) {
   for(vector<string>::iterator itr = vec.begin(); itr != vec.end(); ++itr){
     VALUE rstr = rb_str_new2(itr->c_str());
     rb_enc_associate_index(rstr, UTF8_ENCODE_ID);
-    rb_ary_push(rb_ary, rb_str_new2(itr->c_str()));
+    rb_ary_push(rb_ary, rstr);
   }
   return rb_ary;
 }

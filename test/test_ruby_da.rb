@@ -9,6 +9,8 @@ class TestRubyDa < Minitest::Test
   def test_insert
     trie = RubyDa::Trie.new
     trie.build(["日本", "日本の夜明け", "日本の夜明け前", "Yahoo"])
-    puts trie.extract_all_matched("Yahoo!日本の夜明けは明るい")
+    trie.extract_all_matched("Yahoo!日本の夜明けは明るい").each{|word|
+      puts word.encoding
+    }
   end
 end
