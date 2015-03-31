@@ -12,5 +12,5 @@ task :build => :compile
 
 Rake::ExtensionTask.new("ruby_da") do |ext|
   ext.lib_dir = "lib/ruby_da"
-  ext.config_options = "--with-da-include=#{File.dirname(__FILE__)}/include"
+  ext.config_options = "--with-da-include=#{File.dirname(__FILE__)}/libda/include"
 end

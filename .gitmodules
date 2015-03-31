@@ -1,0 +1,3 @@
+[submodule "libda"]
+	path = libda
+	url = git://github.com/shnya/libda.git
