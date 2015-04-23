@@ -1,18 +1,18 @@
 PATH
   remote: .
   specs:
-    ruby_da (0.1.0)
+    ruby_da (0.1.0-java)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.5.1)
+    minitest (5.6.0)
     rake (10.4.2)
     rake-compiler (0.9.5)
       rake
 
 PLATFORMS
-  ruby
+  java
 
 DEPENDENCIES
   bundler (~> 1.9)

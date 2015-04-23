@@ -18,7 +18,13 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.extensions    = ["ext/ruby_da/extconf.rb"]
+  if RUBY_PLATFORM =~ /java/
+    spec.platform = "java"
+    spec.files << "lib/java-da.jar"
+    spec.files << "lib/ruby_da.jar"
+  else
+    spec.extensions    = ["ext/ruby_da/extconf.rb"]
+  end
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"

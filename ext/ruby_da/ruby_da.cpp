@@ -49,6 +49,25 @@ static void check_utf8_encoding(VALUE str){
   }
 }
 
+static VALUE wrap_RubyDa_enumerate(VALUE self, VALUE str) {
+  check_utf8_encoding(str);
+  DoubleArray* p = get_ptr(self);
+  vector<pair<string, int> > result;
+  p->enumerate(StringValueCStr(str), result);
+  VALUE rb_ary = rb_ary_new();
+  for(vector<pair<string, int> >::iterator itr = result.begin(); itr != result.end(); ++itr){
+    VALUE rb_ary_elems = rb_ary_new();
+    VALUE rstr = rb_str_new2(itr->first.c_str());
+    rb_enc_associate_index(rstr, UTF8_ENCODE_ID);
+    VALUE rid = INT2FIX(itr->second);
+    rb_ary_push(rb_ary_elems, rstr);
+    rb_ary_push(rb_ary_elems, rid);
+
+    rb_ary_push(rb_ary, rb_ary_elems);
+  }
+  return rb_ary;
+}
+
 static VALUE wrap_RubyDa_common_prefix_search(VALUE self, VALUE str) {
   check_utf8_encoding(str);
   DoubleArray* p = get_ptr(self);
@@ -109,6 +128,18 @@ static VALUE wrap_RubyDa_erase(VALUE self, VALUE str) {
   return is_success ? Qtrue : Qfalse;
 }
 
+static VALUE wrap_RubyDa_save(VALUE self, VALUE filename) {
+  DoubleArray* p = get_ptr(self);
+  bool is_success = p->save(StringValueCStr(filename));
+  return is_success ? Qtrue : Qfalse;
+}
+
+static VALUE wrap_RubyDa_load(VALUE self, VALUE filename) {
+  DoubleArray* p = get_ptr(self);
+  bool is_success = p->save(StringValueCStr(filename));
+  return is_success ? Qtrue : Qfalse;
+}
+
 
 
 extern "C" {
@@ -118,11 +149,14 @@ extern "C" {
 
     rb_define_alloc_func(klass, wrap_RubyDa_allocate);
     rb_define_private_method(klass, "initialize", (VALUE(*)(...))wrap_RubyDa_initialize, 0);
+    rb_define_method(klass, "enumerate", (VALUE(*)(...))wrap_RubyDa_enumerate, 1);
     rb_define_method(klass, "common_prefix_search", (VALUE(*)(...))wrap_RubyDa_common_prefix_search, 1);
     rb_define_method(klass, "contains", (VALUE(*)(...))wrap_RubyDa_contains, 1);
     rb_define_method(klass, "extract_all_matched", (VALUE(*)(...))wrap_RubyDa_extract_all_matched, 1);
     rb_define_method(klass, "insert", (VALUE(*)(...))wrap_RubyDa_insert, -1);
     rb_define_method(klass, "build", (VALUE(*)(...))wrap_RubyDa_build, 1);
     rb_define_method(klass, "erase", (VALUE(*)(...))wrap_RubyDa_erase, 1);
+    rb_define_method(klass, "save", (VALUE(*)(...))wrap_RubyDa_save, 1);
+    rb_define_method(klass, "load", (VALUE(*)(...))wrap_RubyDa_load, 1);
   }
 }
