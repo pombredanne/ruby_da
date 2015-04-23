@@ -68,6 +68,14 @@ static VALUE wrap_RubyDa_enumerate(VALUE self, VALUE str) {
   return rb_ary;
 }
 
+static VALUE wrap_RubyDa_exact_match(VALUE self, VALUE str) {
+  check_utf8_encoding(str);
+  DoubleArray* p = get_ptr(self);
+  int id = p->exact_match(StringValueCStr(str));
+  return INT2FIX(id);
+}
+
+
 static VALUE wrap_RubyDa_common_prefix_search(VALUE self, VALUE str) {
   check_utf8_encoding(str);
   DoubleArray* p = get_ptr(self);
@@ -80,7 +88,7 @@ static VALUE wrap_RubyDa_contains(VALUE self, VALUE str) {
   check_utf8_encoding(str);
   DoubleArray* p = get_ptr(self);
   vector<string> result;
-  bool is_contains = static_cast<int>(p->contains(StringValueCStr(str)));
+  bool is_contains = p->contains(StringValueCStr(str));
   return is_contains ? Qtrue : Qfalse;
 }
 
@@ -149,6 +157,7 @@ extern "C" {
 
     rb_define_alloc_func(klass, wrap_RubyDa_allocate);
     rb_define_private_method(klass, "initialize", (VALUE(*)(...))wrap_RubyDa_initialize, 0);
+    rb_define_method(klass, "exact_match", (VALUE(*)(...))wrap_RubyDa_exact_match, 1);
     rb_define_method(klass, "enumerate", (VALUE(*)(...))wrap_RubyDa_enumerate, 1);
     rb_define_method(klass, "common_prefix_search", (VALUE(*)(...))wrap_RubyDa_common_prefix_search, 1);
     rb_define_method(klass, "contains", (VALUE(*)(...))wrap_RubyDa_contains, 1);

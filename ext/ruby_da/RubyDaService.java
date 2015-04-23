@@ -77,9 +77,14 @@ public class RubyDaService implements BasicLibraryService {
             return res; 
         }
 
+        @JRubyMethod(name = {"exact_match", "exactMatch"})
+        public IRubyObject exactMatch(ThreadContext context, IRubyObject str){
+            return RubyNumeric.int2fix(this.getRuntime(), da.exactMatch(((RubyString) str).decodeString()));
+        }
+
         @JRubyMethod(name = {"common_prefix_search", "commonPrefixSearch"})
         public IRubyObject commonPrefixSearch(ThreadContext context, IRubyObject str){
-            return convToArray(da.commonPrefixSearch(str.asJavaString()));
+            return convToArray(da.commonPrefixSearch(((RubyString) str).decodeString()));
         }
 
         @JRubyMethod(name = "contains")
