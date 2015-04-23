@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby_da (0.1.0-java)
+    ruby_da (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -13,6 +13,7 @@ GEM
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   bundler (~> 1.9)
