@@ -12,6 +12,8 @@ if RUBY_PLATFORM =~ /java/
   BUILD_FILE = File.join(File.dirname(__FILE__), 'java_da', 'build.xml')
   JAR_SRC_FILE = File.join(File.dirname(__FILE__), 'java_da', 'target', 'java-da.jar')
   JAR_DEST_FILE = File.join(File.dirname(__FILE__), 'lib', 'java-da.jar')
+  CLEAN << File.join(File.dirname(__FILE__), 'java_da', 'target')
+  CLOBBER << JAR_DEST_FILE
 
 
   task :pre_compile do
@@ -27,12 +29,9 @@ if RUBY_PLATFORM =~ /java/
     ext.source_version = '1.8'
     ext.target_version = '1.8'
   end
-  CLEAN << "lib/ruby_da.jar"
-  CLEAN << "lib/java-da.jar"
 else
   require "rake/extensiontask"
   Rake::ExtensionTask.new("ruby_da") do |ext|
     ext.lib_dir = "lib/ruby_da"
   end
-  CLEAN << "lib/ruby_da/ruby_da.bundle"
 end
