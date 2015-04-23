@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "ruby_da"
   spec.version       = RubyDa::VERSION
   spec.authors       = ["Masahiko Higashiyama"]
-  spec.email         = ["shnya@shnya.jp"]
+  spec.email         = ["masahiko.higashiyama@gmail.com"]
 
   spec.summary       = %q{Double Array Implementation}
   spec.description   = %q{Double Array Implementation}
-  spec.homepage      = "https://github.com/shnya/libda"
+  spec.homepage      = "https://github.com/shnya/ruby_da"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
