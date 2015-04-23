@@ -27,9 +27,12 @@ if RUBY_PLATFORM =~ /java/
     ext.source_version = '1.8'
     ext.target_version = '1.8'
   end
+  CLEAN << "lib/ruby_da.jar"
+  CLEAN << "lib/java-da.jar"
 else
   require "rake/extensiontask"
   Rake::ExtensionTask.new("ruby_da") do |ext|
     ext.lib_dir = "lib/ruby_da"
   end
+  CLEAN << "lib/ruby_da/ruby_da.bundle"
 end
