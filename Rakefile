@@ -18,6 +18,7 @@ if RUBY_PLATFORM =~ /java/
     `ant -f #{BUILD_FILE} jar`
     rm_f(JAR_DEST_FILE)
     mv(JAR_SRC_FILE, JAR_DEST_FILE)
+    `ant -f #{BUILD_FILE} clean`
   end
   task :compile => :pre_compile
   require "rake/javaextensiontask"
