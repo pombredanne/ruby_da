@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     spec.platform = "java"
     spec.files << "lib/java-da.jar"
     spec.files << "lib/ruby_da.jar"
-    spec.files.concat(`find ./javada -print0`.split("\x0").reject{ |f| f.match(%r{(.git|.idea|test)}) })
+    spec.files.concat(`find ./javada -print0`.split("\x0").reject{ |f| f.match(%r{(.git|.idea|test|target)}) })
   else
     spec.platform = Gem::Platform::CURRENT
     spec.extensions    = ["ext/ruby_da/extconf.rb"]
