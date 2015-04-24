@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
     spec.files << "lib/ruby_da.jar"
     spec.files << `find ./libda/include -print0 -name "*.hpp"`.split("\x0")
   else
+    spec.platform = Gem::Platform::CURRENT
     spec.extensions    = ["ext/ruby_da/extconf.rb"]
     spec.files.concat(`find ./libda -print0 -name "*.hpp"`.split("\x0").reject{ |f| f.match(%r{(.git|test)}) })
   end
