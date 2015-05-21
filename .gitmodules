@@ -1,3 +1,6 @@
 [submodule "java_da"]
 	path = java_da
 	url = git@github.com:shnya/java_da.git
+[submodule "libda"]
+	path = libda
+	url = git@github.com:shnya/libda.git
