@@ -144,7 +144,7 @@ static VALUE wrap_RubyDa_save(VALUE self, VALUE filename) {
 
 static VALUE wrap_RubyDa_load(VALUE self, VALUE filename) {
   DoubleArray* p = get_ptr(self);
-  bool is_success = p->save(StringValueCStr(filename));
+  bool is_success = p->load(StringValueCStr(filename));
   return is_success ? Qtrue : Qfalse;
 }
 
